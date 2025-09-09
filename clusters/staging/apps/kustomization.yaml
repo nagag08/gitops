@@ -7,3 +7,8 @@ patches:
     target:
       kind: HelmRelease
       name: podinfo
+
+configMapGenerator:
+  - name: jfrog-values
+    files:
+      - values.yaml=jfrog-values.yaml
