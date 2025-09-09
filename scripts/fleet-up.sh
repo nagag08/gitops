@@ -40,7 +40,10 @@ kind create cluster --name "${CLUSTER_PRODUCTION}" \
 --wait 5m
 
 echo "INFO - Creating kubeconfig secrets in the hub cluster"
-
+echo "----------------------"
+echo "Run update certs script"
+echo "----------------------"
+read -p "Press Enter to continue..."
 kubectl config use-context "kind-${CLUSTER_HUB}"
 
 kind get kubeconfig --internal --name ${CLUSTER_STAGING} > "${repo_root}/bin/staging.kubeconfig"
