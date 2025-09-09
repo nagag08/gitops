@@ -19,7 +19,7 @@ flux --context "kind-${CLUSTER_HUB}" install \
 --components-extra=image-reflector-controller,image-automation-controller
 
 flux --context "kind-${CLUSTER_HUB}" create source git flux-system \
---url=https://github.com/fluxcd/flux2-hub-spoke-example \
+--url=https://github.com/gnaga/flux2-hub-spoke-example \
 --ignore-paths="hub/flux-system/" \
 --branch=main \
 --interval=1m \
