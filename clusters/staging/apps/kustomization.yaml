@@ -10,6 +10,9 @@ patches:
 
 configMapGenerator:
   - name: jfrog-values
-    namespace: artifactory
+    namespace: staging
     files:
       - values.yaml=jfrog-values.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
