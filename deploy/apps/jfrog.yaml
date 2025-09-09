@@ -16,6 +16,9 @@ spec:
   targetNamespace: artifactory
   releaseName: artifactory
   interval: 30m
+  install:
+    remediation:
+      retries: 3
   chart:
     spec:
       chart: artifactory
