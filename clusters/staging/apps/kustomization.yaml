@@ -10,5 +10,6 @@ patches:
 
 configMapGenerator:
   - name: jfrog-values
+    namespace: artifactory
     files:
       - values.yaml=jfrog-values.yaml
