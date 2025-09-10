@@ -12,7 +12,7 @@
 
 set -o errexit
 set -o pipefail
-addcerts {
+addcerts() {
     docker cp ~/Downloads/n.pem $1:/usr/local/share/ca-certificates/n.crt
     docker cp ~/Downloads/Z.pem $1:/usr/local/share/ca-certificates/z.crt
     docker exec $1 update-ca-certificates
