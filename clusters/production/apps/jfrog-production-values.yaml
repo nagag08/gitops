@@ -7,8 +7,9 @@ artifactory:
 
 postgresql:
   enabled: true
-  persistence:
-    size: 5Gi
+  primary:
+    persistence:
+      size: 5Gi
 
 nginx:
   enabled: true
