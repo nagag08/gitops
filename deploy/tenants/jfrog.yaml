@@ -12,7 +12,7 @@ metadata:
   labels:
     toolkit.fluxcd.io/tenant: dev-team
   name: flux
-  namespace: podinfo
+  namespace: artifactory
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
