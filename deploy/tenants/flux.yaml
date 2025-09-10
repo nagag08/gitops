@@ -35,3 +35,38 @@ subjects:
   - kind: ServiceAccount
     name: flux-cluster-admin
     namespace: "${CLUSTER_NAME}"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    toolkit.fluxcd.io/tenant: sre-team
+  name: flux-restricted-secrets
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    toolkit.fluxcd.io/tenant: sre-team
+  name: flux-restricted-secrets
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: flux-restricted-secrets
+subjects:
+  - kind: ServiceAccount
+    name: flux-restricted
+    namespace: "${CLUSTER_NAME}"
