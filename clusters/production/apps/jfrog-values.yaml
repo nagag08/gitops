@@ -5,6 +5,11 @@ metadata:
 spec:
   chart:
     spec:
+      chart: artifactory
+      sourceRef:
+        kind: HelmRepository
+        name: jfrog
+      interval: 12h
       version: "107.x"
   test:
     enable: false
