@@ -5,3 +5,21 @@ metadata:
   name: artifactory
   labels:
     toolkit.fluxcd.io/tenant: sre-team
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    toolkit.fluxcd.io/tenant: dev-team
+  name: flux
+  namespace: podinfo
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  # This binding limits the access to the current namespace
+  # being a RoleBinding instead of a ClusterRoleBinding
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: flux-restricted
+    namespace: "${CLUSTER_NAME}"
