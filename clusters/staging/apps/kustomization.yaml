@@ -12,7 +12,7 @@ configMapGenerator:
   - name: jfrog-values
     namespace: staging
     files:
-      - values.yaml=jfrog-values.yaml
+      - values.yaml=jfrog-staging-values.yaml
 
 generatorOptions:
   disableNameSuffixHash: true

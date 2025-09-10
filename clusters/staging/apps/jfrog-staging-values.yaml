@@ -1,0 +1,17 @@
+artifactory:
+  replicaCount: 1
+  persistence:
+    size: 10Gi
+  service:
+    type: ClusterIP
+
+postgresql:
+  enabled: true
+  postgresqlPassword: "artifactory123"
+  persistence:
+    size: 10Gi
+
+nginx:
+  enabled: true
+  service:
+    type: ClusterIP

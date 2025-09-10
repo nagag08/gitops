@@ -14,19 +14,25 @@ metadata:
   name: artifactory
 spec:
   targetNamespace: artifactory
+  storageNamespace: artifactory
   releaseName: artifactory
   interval: 30m
-  install:
-    remediation:
-      retries: 3
   chart:
     spec:
       chart: artifactory
-      version: "107.x"
       sourceRef:
         kind: HelmRepository
         name: jfrog
       interval: 12h
+  driftDetection:
+    mode: enabled
+    ignore:
+      - paths: ["/spec/replicas"]
+        target:
+          kind: Deployment
+  install:
+    remediation:
+      retries: 3
   valuesFrom:
     - kind: ConfigMap
       name: jfrog-values

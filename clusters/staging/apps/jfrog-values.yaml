@@ -8,21 +8,7 @@ spec:
       version: "107.x"
   test:
     enable: false
-  values:
-    artifactory:
-      replicaCount: 1
-      persistence:
-        size: 20Gi
-      service:
-        type: ClusterIP
-
-    postgresql:
-      enabled: true
-      postgresqlPassword: "artifactory123"
-      persistence:
-        size: 10Gi
-
-    nginx:
-      enabled: true
-      service:
-        type: ClusterIP
+  valuesFrom:
+    - kind: ConfigMap
+      name: jfrog-values
+      valuesKey: values.yaml
