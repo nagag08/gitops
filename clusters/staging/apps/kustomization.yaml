@@ -3,10 +3,10 @@ kind: Kustomization
 resources:
   - ../../../deploy/apps
 patches:
-  - path: podinfo-values.yaml
+  - path: jfrog-values.yaml
     target:
       kind: HelmRelease
-      name: podinfo
+      name: artifactory
 
 configMapGenerator:
   - name: jfrog-values
