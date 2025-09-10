@@ -10,7 +10,7 @@ spec:
         kind: HelmRepository
         name: jfrog
       interval: 12h
-      version: "107.x"
+      version: "107.117.14"
   test:
     enable: false
   valuesFrom:
