@@ -11,7 +11,7 @@ metadata:
 spec:
   interval: 1h
   retryInterval: 3m
-  timeout: 5m
+  timeout: 30m
   prune: true
   wait: true
   path: ./clusters/production/tenants
@@ -37,7 +37,7 @@ spec:
   targetNamespace: production
   interval: 1h
   retryInterval: 3m
-  timeout: 5m
+  timeout: 30m
   prune: true
   wait: true
   path: ./clusters/production/infra-controllers
@@ -69,7 +69,7 @@ spec:
   targetNamespace: production
   interval: 1h
   retryInterval: 3m
-  timeout: 5m
+  timeout: 30m
   prune: true
   wait: true
   path: ./clusters/production/infra-configs
@@ -92,7 +92,7 @@ spec:
   targetNamespace: production
   interval: 1h
   retryInterval: 3m
-  timeout: 5m
+  timeout: 30m
   prune: true
   wait: true
   path: ./clusters/production/apps
