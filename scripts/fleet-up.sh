@@ -12,7 +12,12 @@
 
 set -o errexit
 set -o pipefail
-
+addcerts {
+    docker cp ~/Downloads/n.pem $1:/usr/local/share/ca-certificates/n.crt
+    docker cp ~/Downloads/Z.pem $1:/usr/local/share/ca-certificates/z.crt
+    docker exec $1 update-ca-certificates
+    docker restart $1
+}
 repo_root=$(git rev-parse --show-toplevel)
 mkdir -p "${repo_root}/bin"
 
@@ -25,12 +30,18 @@ kind create cluster --name "${CLUSTER_HUB}" \
 --image "kindest/node:${CLUSTER_VERSION}" \
 --wait 5m
 
+dockerid=$(docker ps --format "table {{.ID}}\t{{.Names}}" | grep $CLUSTER_HUB | awk '{print $1}')
+addcerts $dockerid
+
 CLUSTER_STAGING="flux-staging"
 echo "INFO - Creating cluster ${CLUSTER_STAGING}"
 
 kind create cluster --name "${CLUSTER_STAGING}" \
 --image "kindest/node:${CLUSTER_VERSION}" \
 --wait 5m
+
+dockerid=$(docker ps --format "table {{.ID}}\t{{.Names}}" | grep $CLUSTER_STAGING | awk '{print $1}')
+addcerts $dockerid
 
 CLUSTER_PRODUCTION="flux-production"
 echo "INFO - Creating cluster ${CLUSTER_PRODUCTION}"
@@ -39,12 +50,15 @@ kind create cluster --name "${CLUSTER_PRODUCTION}" \
 --image "kindest/node:${CLUSTER_VERSION}" \
 --wait 5m
 
-echo "INFO - Creating kubeconfig secrets in the hub cluster"
-echo "----------------------"
-echo "Run update certs script"
-echo "----------------------"
-read -p "Press Enter to continue..."
-kubectl config use-context "kind-${CLUSTER_HUB}"
+dockerid=$(docker ps --format "table {{.ID}}\t{{.Names}}" | grep $CLUSTER_PRODUCTION | awk '{print $1}')
+addcerts $dockerid
+
+# echo "INFO - Creating kubeconfig secrets in the hub cluster"
+# echo "----------------------"
+# echo "Run update certs script"
+# echo "----------------------"
+# read -p "Press Enter to continue..."
+# kubectl config use-context "kind-${CLUSTER_HUB}"
 
 kind get kubeconfig --internal --name ${CLUSTER_STAGING} > "${repo_root}/bin/staging.kubeconfig"
 kubectl --context "kind-${CLUSTER_HUB}" create ns staging
