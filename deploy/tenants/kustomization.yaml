@@ -4,4 +4,3 @@ resources:
   - flux.yaml
   - ingress-nginx.yaml
   - jfrog.yaml
-  - podinfo.yaml
