@@ -1,21 +1,68 @@
-artifactory:
-  replicaCount: 1
-  persistence:
-    size: 10Gi
-  service:
-    type: ClusterIP
+# Default values for jfrog-platform.
 
+# nameOverride:
+# fullnameOverride:
+
+# If this is an upgrade over an existing platform chart(>= 10.0.0), explicitly pass 'gaUpgradeReady=true' to upgrade
+gaUpgradeReady: false
+
+# If you are upgrading from a chart version(< 10.18.x) that has postgresql.image.tag of 13.x, make sure to set the current postgresql.image.tag to the same tag and databaseUpgradeReady=true.
+# If you are upgrading from a chart version (>= 10.18.x), just set databaseUpgradeReady=true.
+databaseUpgradeReady: true
+
+global:
+  # Allows skipping image verification, applicable to bitnami chart images only
+  security:
+    allowInsecureImages: true
+  joinKey: EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+  masterKey: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+  
+
+
+## This Postgresql is used by all products , set postgresql.enabled: false, when you want to use external postgresql for all products
 postgresql:
-  auth:
-    password: jfrog1234
+  enabled: true
+  enablePostgresUser: true
   image:
+    repository: bitnami/postgresql
     tag: 16.6.0-debian-12-r2
-  enabled: true
+  auth:
+    postgresPassword: "postgres"
   primary:
+    extendedConfiguration: |
+      max_connections = 1000
+      max_wal_size = 1000MB
     persistence:
-      size: 5Gi
+      size: 2Gi
 
-nginx:
+
+## This Rabbitmq is used by Xray and Pipelines only, set rabbitmq.enabled: false, when Xray or Pipelines is not enabled
+rabbitmq:
+  enabled: false
+  ## Enable the flag if the feature flags in rabbitmq is enabled manually
+
+artifactory:
   enabled: true
-  service:
-    type: ClusterIP
+  mc:
+    enabled: true
+  artifactory:
+    replicaCount: 1
+    migration:
+      enabled: false
+    persistence:
+      size: 10Gi
+    # license:
+    #   secret:
+    #   dataKey:
+
+xray:
+  enabled: false
+
+catalog:
+  enabled: false
+
+distribution:
+  enabled: false
+
+worker:
+  enabled: false

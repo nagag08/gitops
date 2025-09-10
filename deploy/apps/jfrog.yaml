@@ -20,7 +20,7 @@ spec:
   timeout: 30m
   chart:
     spec:
-      chart: artifactory
+      chart: jfrog-platform
       sourceRef:
         kind: HelmRepository
         name: jfrog

@@ -5,12 +5,12 @@ metadata:
 spec:
   chart:
     spec:
-      chart: artifactory
+      chart: jfrog-platform
       sourceRef:
         kind: HelmRepository
         name: jfrog
       interval: 12h
-      version: "107.117.14"
+      version: "11.2.1"
   test:
     enable: false
   valuesFrom:
