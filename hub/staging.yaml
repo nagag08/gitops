@@ -111,4 +111,4 @@ spec:
               name: cluster-kubeconfig
         - op: add
           path: /spec/serviceAccountName
-          value: flux-restricted
+          value: flux-cluster-admin
