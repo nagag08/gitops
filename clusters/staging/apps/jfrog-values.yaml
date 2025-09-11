@@ -6,12 +6,12 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: jfrog-platform
+      chart: hello
       sourceRef:
         kind: HelmRepository
         name: jfrog
       interval: 12h
-      version: "11.2.1"
+      version: "0.1.0"
   test:
     enable: false
   valuesFrom:
