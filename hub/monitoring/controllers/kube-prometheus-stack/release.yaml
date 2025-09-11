@@ -27,8 +27,11 @@ spec:
     alertmanager:
       enabled: false
     prometheus:
+      service:
+        type: NodePort
       prometheusSpec:
         retention: 24h
+        enableRemoteWriteReceiver: true
         resources:
           requests:
             cpu: 200m

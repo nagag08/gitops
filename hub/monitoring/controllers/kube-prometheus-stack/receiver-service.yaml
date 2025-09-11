@@ -1,0 +1,18 @@
+# receiver-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-receiver-endpoint
+  namespace: monitoring # Use the namespace where your central prometheus is
+spec:
+  type: NodePort
+  ports:
+  - name: remote-write
+    port: 8080
+    targetPort: 19291 # The default remote write port inside the pod
+    protocol: TCP
+  selector:
+    # This selector MUST match your central Prometheus pod's labels.
+    # Use `kubectl get pod -n monitoring --show-labels` to verify.
+    app.kubernetes.io/name: prometheus
+    prometheus: kube-prometheus-stack-prometheus
