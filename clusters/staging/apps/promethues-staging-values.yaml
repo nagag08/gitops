@@ -11,6 +11,7 @@ prometheus:
     # Minimal retention since metrics are sent to hub
     retention: "2h"
     retentionSize: "1GB"
+    enableOTLPReceiver: false
     
     # Even more reduced resource allocation for staging
     resources:
