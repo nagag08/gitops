@@ -6,13 +6,13 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: prometheus-community/kube-prometheus-stack
+      chart: kube-prometheus-stack
       sourceRef:
         kind: HelmRepository
         name: monitoring
       interval: 12h
       version: "77.x"
-    test:
+  test:
     enable: false
   valuesFrom:
     - kind: ConfigMap
