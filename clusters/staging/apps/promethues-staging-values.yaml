@@ -7,6 +7,10 @@ alertmanager:
 
 # Configure Prometheus with minimal resources and remote write
 prometheus:
+  service:
+    type: NodePort
+    nodePort: 30900
+    port: 9090
   prometheusSpec:
     # Minimal retention since metrics are sent to hub
     retention: "2h"
@@ -29,25 +33,6 @@ prometheus:
           resources:
             requests:
               storage: 1Gi
-    
-    # Remote write configuration to hub cluster
-    remoteWrite:
-      - url: "http://10.96.235.11:8080/api/v1/write"
-        writeRelabelConfigs:
-          # Add cluster label to identify metrics source
-          - targetLabel: cluster
-            replacement: "staging"
-          # Add origin prometheus label
-          - targetLabel: origin_prometheus
-            replacement: "staging-prometheus"
-        queueConfig:
-          capacity: 5000
-          maxShards: 25
-          maxSamplesPerSend: 1000
-          batchSendDeadline: 5s
-          minBackoff: 30ms
-          maxBackoff: 100ms
-    
     # External labels
     externalLabels:
       cluster: "staging"

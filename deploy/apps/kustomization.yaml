@@ -3,3 +3,9 @@ kind: Kustomization
 resources:
   - jfrog.yaml
   - promethues-metrics.yaml
+
+configMapGenerator:
+  - name: prometheus-values
+    namespace: monitoring
+    files:
+      - values.yaml=promethues-hub-values.yaml
