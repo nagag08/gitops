@@ -37,7 +37,4 @@ spec:
       retries: 3
   upgrade:
     timeout: 5m
-  valuesFrom:
-    - kind: ConfigMap
-      name: prometheus-values
-      valuesKey: values.yaml
+

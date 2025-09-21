@@ -1,3 +1,49 @@
+prometheus:
+  prometheusSpec:
+    externalLabels:
+      cluster: "cluster1"
+    additionalScrapeConfigs:
+    - job_name: 'federate-cluster2'
+      honor_labels: true
+      scrape_interval: 30s
+      metrics_path: '/federate'
+      params:
+        'match[]':
+          - '{job=~".+"}'   # federate all metrics
+      static_configs:
+        - targets:
+            - 'host.docker.internal:30900'
+      relabel_configs:
+        - target_label: cluster
+          replacement: "staging"
+
+    - job_name: 'federate-cluster1'
+      honor_labels: false  # Important: don't honor labels so we can override
+      scrape_interval: 30s
+      metrics_path: '/federate'
+      params:
+        'match[]':
+          - '{job=~".+", cluster!="staging", cluster!="production"}'   # Only federate metrics that don't have cluster2 or cluster3 label
+      static_configs:
+        - targets:
+            - 'localhost:9090'
+      metric_relabel_configs:
+        - target_label: cluster
+          replacement: "hub"
+
+    - job_name: 'federate-cluster3'
+      honor_labels: true
+      scrape_interval: 30s
+      metrics_path: '/federate'
+      params:
+        'match[]':
+          - '{job=~".+"}'   # federate all metrics
+      static_configs:
+        - targets:
+            - 'host.docker.internal:30901'
+      relabel_configs:
+        - target_label: cluster
+          replacement: "production"
 kube-state-metrics:
   # Enable all standard Kubernetes collectors to get comprehensive metrics
   collectors:
