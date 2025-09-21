@@ -17,6 +17,10 @@ configMapGenerator:
     namespace: staging
     files:
       - values.yaml=promethues-staging-values.yaml
+  - name: prometheus-values
+    namespace: staging
+    files:
+      - values.yaml=promethues-staging-values.yaml
 
 generatorOptions:
   disableNameSuffixHash: true

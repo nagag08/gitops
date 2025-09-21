@@ -4,8 +4,8 @@ resources:
   - jfrog.yaml
   - promethues-metrics.yaml
 
-secretGenerator:
-  - name: additional-scrape-configs
+configMapGenerator:
+  - name: prometheus-values
     namespace: monitoring
     files:
-      - additional-scrape-configs.yaml=promethues-hub-values.yaml
+      - values.yaml=promethues-hub-values.yaml
