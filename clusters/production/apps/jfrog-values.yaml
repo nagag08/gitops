@@ -6,12 +6,12 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: postgresql
+      chart: jfrog-platform  
+      version: 11.2.1
       sourceRef:
         kind: HelmRepository
         name: jfrog
       interval: 12h
-      version: "16.7.26"
   test:
     enable: false
   valuesFrom:

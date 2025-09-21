@@ -20,8 +20,8 @@ spec:
   timeout: 30m
   chart:
     spec:
-      chart: postgresql  
-      version: 16.7.26
+      chart: jfrog-platform  
+      # version: 11.2.2
       sourceRef:
         kind: HelmRepository
         name: jfrog
