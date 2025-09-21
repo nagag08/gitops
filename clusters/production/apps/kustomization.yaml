@@ -17,10 +17,6 @@ configMapGenerator:
     namespace: production
     files:
       - values.yaml=jfrog-production-values.yaml
-  - name: prometheus-values
-    namespace: production
-    files:
-      - values.yaml=promethues-production-values.yaml
-      
+
 generatorOptions:
   disableNameSuffixHash: true

@@ -41,3 +41,9 @@ spec:
     - kind: ConfigMap
       name: prometheus-values
       valuesKey: values.yaml
+  values:
+    prometheus:
+      prometheusSpec:
+        additionalScrapeConfigsSecret:
+          name: additional-scrape-configs
+          key: additional-scrape-configs.yaml
