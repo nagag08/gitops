@@ -7,7 +7,7 @@ patches:
     target:
       kind: HelmRelease
       name: artifactory
-  - path: promethues-metrics-production.yaml
+  - path: promethues-metrics-staging.yaml
     target:
       kind: HelmRelease
       name: monitoring
