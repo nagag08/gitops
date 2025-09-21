@@ -7,20 +7,13 @@ patches:
     target:
       kind: HelmRelease
       name: artifactory
-  - path: promethues-metrics-staging.yaml
-    target:
-      kind: HelmRelease
-      name: monitoring
 
 configMapGenerator:
   - name: jfrog-values
     namespace: staging
     files:
       - values.yaml=jfrog-staging-values.yaml
-  - name: prometheus-values
-    namespace: staging
-    files:
-      - values.yaml=promethues-staging-values.yaml
+
 
 generatorOptions:
   disableNameSuffixHash: true

@@ -4,5 +4,4 @@ resources:
   - flux.yaml
   - ingress-nginx.yaml
   - jfrog.yaml
-  - promethues-metrics.yaml
 
