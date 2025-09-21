@@ -40,7 +40,7 @@ echo "INFO - Creating cluster ${CLUSTER_STAGING}"
 
 kind create cluster --name "${CLUSTER_STAGING}" \
 --image "kindest/node:${CLUSTER_VERSION}" \
---wait 5m --config kind-c2.yaml
+--wait 5m --config scripts/kind-c2.yaml
 
 dockerid=$(docker ps --format "table {{.ID}}\t{{.Names}}" | grep $CLUSTER_STAGING | awk '{print $1}')
 addcerts $dockerid
@@ -50,7 +50,7 @@ echo "INFO - Creating cluster ${CLUSTER_PRODUCTION}"
 
 kind create cluster --name "${CLUSTER_PRODUCTION}" \
 --image "kindest/node:${CLUSTER_VERSION}" \
---wait 5m --config kind-c3.yaml
+--wait 5m --config scripts/kind-c3.yaml
 
 dockerid=$(docker ps --format "table {{.ID}}\t{{.Names}}" | grep $CLUSTER_PRODUCTION | awk '{print $1}')
 addcerts $dockerid
