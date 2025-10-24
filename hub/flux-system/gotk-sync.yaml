@@ -8,10 +8,10 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: work5
+    branch: main
   secretRef:
     name: flux-system
-  url: ssh://git@github.com/gnaga/flux2-hub-spoke-example
+  url: ssh://git@github.com/nagag08/gitops
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
